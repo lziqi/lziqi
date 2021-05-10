@@ -50,7 +50,7 @@ func main() {
 		nightweather := gjson.Get(day.String(), "nightweather").String()
 		daytemp := gjson.Get(day.String(), "daytemp").String()
 		nighttemp := gjson.Get(day.String(), "nighttemp").String()
-		txt += strconv.Itoa(i+1) + " " + date + " " + dayweather + " " + nightweather + " " + daytemp + " ℃ " + nighttemp + " ℃\n"
+		txt += strconv.Itoa(i+1) + ". " + date + " " + dayweather + " " + nightweather + " " + daytemp + " ℃ " + nighttemp + " ℃\n"
 	}
 	writeStringToFile(txt)
 
