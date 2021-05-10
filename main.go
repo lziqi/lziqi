@@ -42,7 +42,7 @@ func main() {
 	city := gjson.Get(string(body), "forecasts.#.city").Array()[0]
 	weather := gjson.Get(string(body), "forecasts.#.casts").Array()[0]
 
-	txt := "# <p align=\"center\">" + city.String() + "</p>" + "\n"
+	txt := "# " + city.String() + "\n"
 	txt += "|日期|白天天气|夜晚天气|白天温度|夜晚温度|" + "\n"
 	txt += "|:--:|:--:|:--:|:--:|:--:|" + "\n"
 	for _, day := range weather.Array() {
