@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 type Weather struct {
@@ -43,14 +42,16 @@ func main() {
 	city := gjson.Get(string(body), "forecasts.#.city").Array()[0]
 	weather := gjson.Get(string(body), "forecasts.#.casts").Array()[0]
 
-	txt := city.String() + "\n"
-	for i, day := range weather.Array() {
+	txt := "# <p align=\"center\">" + city.String() + "</p>" + "\n"
+	txt += "|日期|白天天气|夜晚天气|白天温度|夜晚温度|" + "\n"
+	txt += "|:--:|:--:|:--:|:--:|:--:|" + "\n"
+	for _, day := range weather.Array() {
 		date := gjson.Get(day.String(), "date").String()
 		dayweather := gjson.Get(day.String(), "dayweather").String()
 		nightweather := gjson.Get(day.String(), "nightweather").String()
 		daytemp := gjson.Get(day.String(), "daytemp").String()
 		nighttemp := gjson.Get(day.String(), "nighttemp").String()
-		txt += strconv.Itoa(i+1) + " " + date + " " + dayweather + " " + nightweather + " " + daytemp + " ℃ " + nighttemp + " ℃\n"
+		txt += "|" + date + "|" + dayweather + "|" + nightweather + "|" + daytemp + "℃|" + nighttemp + "℃|\n"
 	}
 	writeStringToFile(txt)
 
