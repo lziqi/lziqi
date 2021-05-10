@@ -1,4 +1,4 @@
-module lziqi
+module github.com/lziqi/lziqi
 
 go 1.16
 
