@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-   - cron : "*/1 0 * * *"
+   - cron : "0 0 * * *"
 
 jobs:
 
@@ -16,12 +16,15 @@ jobs:
       with:
         timezone: Asia/Shanghai
     
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false
+        fetch-depth: 0
 
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.15
+        go-version: 1.16
 
     - run: go mod download
     - run: go run main.go
@@ -38,6 +41,6 @@ jobs:
     - name: Push Changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{secrets.GITHUB_TOKEN}}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
 
