@@ -1,0 +1,43 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+   - cron : "*/1 0 * * *"
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup timezone
+      uses: zcong1993/setup-timezone@master
+      with:
+        timezone: Asia/Shanghai
+    
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.15
+
+    - run: go mod download
+    - run: go run main.go
+    
+    # 提交
+    - name: Commit files
+      run: |
+        git add README.md
+        git config --local user.email "709124735@qq.com"
+        git config --local user.name "lziqi"
+        git commit --allow-empty -m "Update today's weather on $(date)" -a
+    
+    # Push
+    - name: Push Changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+
+
