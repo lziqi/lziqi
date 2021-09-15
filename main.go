@@ -53,6 +53,7 @@ func main() {
 		nighttemp := gjson.Get(day.String(), "nighttemp").String()
 		txt += "|" + date + "|" + dayweather + "|" + nightweather + "|" + daytemp + "℃|" + nighttemp + "℃|\n"
 	}
+	txt += " \n"
 	txt += "[物联网学习指南](http://doc.lziqi.top/IoT)\n"
 	writeStringToFile(txt)
 
