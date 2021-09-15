@@ -44,7 +44,8 @@ func main() {
 
 	txt := "# " + city.String() + "\n"
 	txt += "|日期|白天天气|夜晚天气|白天温度|夜晚温度|" + "\n"
-	txt += "|:--:|:--:|:--:|:--:|:--:|" + "\n"
+	txt += "|:--:|:--:|:--:|:--:|:--:|" + "\n\n"
+	txt += "[物联网学习指南](http://doc.lziqi.top/IoT)\n"
 	for _, day := range weather.Array() {
 		date := gjson.Get(day.String(), "date").String()
 		dayweather := gjson.Get(day.String(), "dayweather").String()
